@@ -1,8 +1,12 @@
 name: merge-to-main
 run-name: Merge to Main branch
-on: [push]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 jobs:
-  Build-and-test:
+  Build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -12,4 +16,9 @@ jobs:
     - run: npm i -g yarn
     - run: yarn install
     - run: yarn build
-    - run: yarn test
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: yarn test
+    needs: Build
+    
