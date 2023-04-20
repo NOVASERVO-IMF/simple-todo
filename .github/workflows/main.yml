@@ -1,8 +1,13 @@
 name: merge-to-main
 run-name: Merge to Main branch
-on: [push]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 jobs:
-  Build-and-test:
+  Build-and-Test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
